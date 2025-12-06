@@ -3,840 +3,2169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Московский Здоровье | Элитная клиника</title>
+    <title>VISION ELITE | Сообщество избранных</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a365d;
-            --secondary: #c53030;
-            --accent: #d4af37;
-            --light: #f7fafc;
-            --dark: #2d3748;
-            --gray: #718096;
-            --transition: all 0.3s ease;
+            --primary: #000000;
+            --secondary: #0a0a0a;
+            --dark-green: #004225;
+            --green: #006241;
+            --light-green: #00a862;
+            --gold: #d4af37;
+            --platinum: #e5e4e2;
+            --text: #f5f5f7;
+            --text-secondary: #86868b;
+            --gradient: linear-gradient(135deg, #000000 0%, #0a1a0a 50%, #000000 100%);
+            --gradient-green: linear-gradient(135deg, #004225 0%, #006241 50%, #004225 100%);
+            --gradient-green-light: linear-gradient(135deg, #006241 0%, #00a862 50%, #006241 100%);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            background: var(--gradient);
+            min-height: 100vh;
+            cursor: default;
         }
         
-        .watermark {
+        /* Сетка-фон с параллаксом */
+        .grid-bg {
             position: fixed;
-            font-size: 25vw;
-            font-weight: 900;
-            color: rgba(26, 54, 93, 0.03);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(0, 100, 65, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 100, 65, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.3;
+            transform: translateY(0);
+        }
+        
+        /* Плавающие элементы */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            white-space: nowrap;
             pointer-events: none;
-            user-select: none;
+            overflow: hidden;
         }
         
-        .watermark-1 {
+        .floating-element {
+            position: absolute;
+            background: rgba(0, 100, 65, 0.1);
+            border: 1px solid rgba(0, 100, 65, 0.2);
+            border-radius: 10px;
+            opacity: 0;
+            animation: floatElement 20s infinite linear;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
             top: 10%;
-            left: -10%;
-            transform: rotate(-15deg);
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 25s;
         }
         
-        .watermark-2 {
-            bottom: 10%;
-            right: -10%;
-            transform: rotate(15deg);
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 5s;
+            animation-duration: 30s;
+            border-radius: 50%;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            right: 15%;
+            animation-delay: 10s;
+            animation-duration: 20s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: 15s;
+            animation-duration: 35s;
+            border-radius: 50%;
+        }
+        
+        /* Парящие частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle 15s infinite linear;
+            filter: blur(1px);
+        }
+        
+        /* Анимации */
+        @keyframes floatElement {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 162, 98, 0.5), 0 0 20px rgba(0, 162, 98, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 162, 98, 0.8), 0 0 40px rgba(0, 162, 98, 0.5);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -500px 0;
+            }
+            100% {
+                background-position: 500px 0;
+            }
+        }
+        
+        @keyframes rotateDollar {
+            0% {
+                transform: perspective(1000px) rotateY(0deg) rotateX(10deg);
+            }
+            100% {
+                transform: perspective(1000px) rotateY(360deg) rotateX(10deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+                box-shadow: 0 0 20px rgba(0, 162, 98, 0.3);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 40px rgba(0, 162, 98, 0.6);
+            }
+        }
+        
+        @keyframes scanLine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(400%);
+            }
+        }
+        
+        @keyframes dollarGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(0, 162, 98, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(0, 162, 98, 0.7));
+            }
         }
         
         /* Header */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
             z-index: 1000;
-        }
-        
-        .header-container {
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 100, 65, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 15px 40px;
+            background-color: rgba(0, 0, 0, 0.97);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
         
         .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
         }
         
-        .logo-icon {
-            color: var(--primary);
-            font-size: 24px;
-            margin-right: 10px;
+        .logo-main {
+            color: var(--text);
         }
         
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
+        .logo-elite {
+            color: var(--light-green);
+            margin-left: 5px;
+            animation: glow 3s infinite ease-in-out;
         }
         
-        .logo-text span {
-            color: var(--secondary);
-        }
-        
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
         }
         
-        nav ul li {
-            margin-left: 30px;
+        .nav-links li {
+            margin-left: 40px;
         }
         
-        nav ul li a {
+        .nav-links a {
+            color: var(--text-secondary);
             text-decoration: none;
-            color: var(--dark);
             font-weight: 500;
-            transition: var(--transition);
+            font-size: 15px;
+            transition: all 0.3s ease;
             position: relative;
         }
         
-        nav ul li a:hover {
-            color: var(--primary);
+        .nav-links a:hover {
+            color: var(--light-green);
         }
         
-        nav ul li a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
+            background: var(--gradient-green-light);
+            transition: width 0.3s ease;
         }
         
-        nav ul li a:hover::after {
+        .nav-links a:hover::after {
             width: 100%;
         }
         
-        .mobile-menu {
+        .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            color: var(--light-green);
             font-size: 24px;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .cta-header {
+            background: transparent;
+            border: 1px solid var(--light-green);
+            color: var(--light-green);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-header:hover {
+            background-color: rgba(0, 162, 98, 0.1);
+            transform: translateY(-2px);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            color: white;
-            padding: 180px 0 100px;
-            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 40px;
+            overflow: hidden;
         }
         
-        .hero h1 {
-            font-size: 48px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 100, 65, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+            animation: fadeInUp 1.5s ease forwards;
+            opacity: 0;
+        }
+        
+        .hero-title {
+            font-size: 5.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
             margin-bottom: 20px;
-            font-weight: 700;
+            background: linear-gradient(90deg, var(--text) 0%, var(--light-green) 50%, var(--text) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s infinite linear;
+            text-transform: uppercase;
         }
         
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 30px;
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 600px;
         }
         
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 600px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* 3D Dollar */
+        .dollar-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            perspective: 1200px;
+            z-index: 5;
+        }
+        
+        .dollar-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateDollar 40s infinite linear;
+            transform: rotateX(10deg);
+        }
+        
+        .dollar-face {
+            position: absolute;
+            width: 300px;
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 162, 98, 0.3);
+            animation: dollarGlow 3s infinite ease-in-out;
+        }
+        
+        .dollar-front {
+            background: linear-gradient(135deg, rgba(20, 80, 50, 0.9) 0%, rgba(0, 100, 65, 0.9) 100%);
+            transform: translateZ(150px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             color: white;
-            padding: 15px 30px;
+        }
+        
+        .dollar-back {
+            background: linear-gradient(135deg, rgba(0, 100, 65, 0.9) 0%, rgba(20, 80, 50, 0.9) 100%);
+            transform: rotateY(180deg) translateZ(150px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .dollar-right {
+            background: linear-gradient(135deg, rgba(10, 60, 40, 0.9) 0%, rgba(0, 80, 55, 0.9) 100%);
+            transform: rotateY(90deg) translateZ(150px);
+            width: 300px;
+        }
+        
+        .dollar-left {
+            background: linear-gradient(135deg, rgba(0, 80, 55, 0.9) 0%, rgba(10, 60, 40, 0.9) 100%);
+            transform: rotateY(-90deg) translateZ(150px);
+            width: 300px;
+        }
+        
+        .dollar-top {
+            background: linear-gradient(135deg, rgba(0, 120, 80, 0.9) 0%, rgba(0, 100, 65, 0.9) 100%);
+            transform: rotateX(90deg) translateZ(150px);
+            width: 300px;
+            height: 300px;
+        }
+        
+        .dollar-bottom {
+            background: linear-gradient(135deg, rgba(0, 100, 65, 0.9) 0%, rgba(0, 120, 80, 0.9) 100%);
+            transform: rotateX(-90deg) translateZ(150px);
+            width: 300px;
+            height: 300px;
+        }
+        
+        .dollar-symbol {
+            font-size: 10rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .dollar-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .dollar-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 162, 98, 0.2) 0%, transparent 70%);
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        /* Кнопки */
+        .btn {
+            padding: 16px 36px;
             border-radius: 50px;
-            text-decoration: none;
             font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
             font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
         }
         
-        .btn:hover {
-            background-color: #9c2c2c;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 162, 98, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
         
-        /* Services */
-        .section {
-            padding: 100px 0;
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-green-light);
+            color: white;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 100, 65, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 100, 65, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--text-secondary);
+            color: var(--text);
+            z-index: 1;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--light-green);
+            color: var(--light-green);
+            transform: translateY(-5px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 150px 40px;
+            position: relative;
         }
         
         .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 100px;
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+            text-transform: uppercase;
         }
         
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent);
-        }
-        
-        .section-title p {
-            color: var(--gray);
-            max-width: 600px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
-        .services-grid {
+        .feature-card {
+            background: rgba(20, 20, 20, 0.5);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 162, 98, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            background: var(--gradient-green-light);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .feature-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 162, 98, 0.1) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-glow {
+            opacity: 1;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 100px 40px;
+            background: rgba(10, 20, 15, 0.7);
+            position: relative;
+        }
+        
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 100, 65, 0.05) 50%, transparent 70%);
+            animation: scanLine 8s infinite linear;
+        }
+        
+        .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 100, 65, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 162, 98, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: var(--gradient-green-light);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Membership Section */
+        .membership {
+            padding: 150px 40px;
+            background: rgba(10, 20, 15, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .membership-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .membership-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .membership-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+        
+        .membership-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 30px;
+            padding: 60px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(0, 162, 98, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.7s;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .membership-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-green-light);
+        }
+        
+        .price {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: var(--gradient-green-light);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .price-period {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .benefits-list i {
+            color: var(--light-green);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+        
+        /* Application Form */
+        .application {
+            padding: 150px 40px;
+            position: relative;
+        }
+        
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 30px;
+            padding: 60px;
+            border: 1px solid rgba(0, 162, 98, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-align: center;
+            background: var(--gradient-green-light);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--light-green);
+            box-shadow: 0 0 20px rgba(0, 162, 98, 0.2);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
         }
         
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+        /* Events Section - Кнопочная карта */
+        .events {
+            padding: 150px 40px;
+            background: rgba(10, 20, 15, 0.7);
         }
         
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .service-content {
-            padding: 25px;
-        }
-        
-        .service-content h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .service-content p {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-        
-        .service-price {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-        
-        /* About */
-        .about {
-            background-color: #f8f9fa;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-text h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            color: var(--gray);
-        }
-        
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Doctors */
-        .doctors-grid {
+        .cities-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
         
-        .doctor-card {
-            background: white;
-            border-radius: 10px;
+        .city-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 162, 98, 0.1);
+            transition: all 0.4s ease;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            text-align: center;
         }
         
-        .doctor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        .city-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 162, 98, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        .doctor-img {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .doctor-info {
-            padding: 20px;
-        }
-        
-        .doctor-info h3 {
-            font-size: 20px;
-            margin-bottom: 5px;
-            color: var(--primary);
-        }
-        
-        .doctor-info p {
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-        
-        .doctor-specialty {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        /* CTA */
-        .cta {
-            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            padding: 100px 0;
-        }
-        
-        .cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .cta p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        /* Contact Form */
-        .contact {
-            background-color: #f8f9fa;
-        }
-        
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-        
-        .contact-info h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .contact-details {
-            margin-bottom: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        
-        .contact-icon {
-            color: var(--primary);
-            margin-right: 15px;
-            font-size: 18px;
-            margin-top: 3px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-control {
+        .city-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: var(--transition);
+            height: 5px;
+            background: var(--gradient-green-light);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
         }
         
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        .city-card:hover::before {
+            transform: scaleX(1);
         }
         
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
+        .city-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--light-green);
+        }
+        
+        .city-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .city-event {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .city-date {
+            font-size: 1rem;
+            color: var(--light-green);
+            font-weight: 600;
         }
         
         /* Footer */
         footer {
-            background-color: var(--primary);
-            color: white;
-            padding: 60px 0 30px;
+            padding: 80px 40px 40px;
+            border-top: 1px solid rgba(0, 100, 65, 0.2);
         }
         
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
         }
         
-        .footer-col h4 {
-            font-size: 18px;
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
             margin-bottom: 20px;
-            position: relative;
         }
         
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
+        .footer-links {
+            display: flex;
+            gap: 60px;
         }
         
-        .footer-col ul {
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .footer-column ul {
             list-style: none;
         }
         
-        .footer-col ul li {
-            margin-bottom: 10px;
+        .footer-column li {
+            margin-bottom: 15px;
         }
         
-        .footer-col ul li a {
-            color: #cbd5e0;
+        .footer-column a {
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s ease;
         }
         
-        .footer-col ul li a:hover {
-            color: white;
-            padding-left: 5px;
+        .footer-column a:hover {
+            color: var(--light-green);
         }
         
-        .social-links {
+        .social-icons {
             display: flex;
             gap: 15px;
+            margin-top: 20px;
         }
         
-        .social-links a {
-            display: inline-flex;
+        .social-icons a {
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-            color: white;
-            transition: var(--transition);
+            color: var(--text);
+            transition: all 0.3s ease;
         }
         
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-3px);
+        .social-icons a:hover {
+            background: var(--light-green);
+            color: var(--primary);
+            transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e0;
-            font-size: 14px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
-            .about-content, .contact-container {
-                grid-template-columns: 1fr;
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .dollar-container {
+                width: 400px;
+                height: 400px;
+                right: 0;
             }
             
-            .about-img {
-                order: -1;
+            .dollar-face {
+                width: 240px;
+                height: 480px;
+            }
+            
+            .dollar-front, .dollar-back {
+                transform: translateZ(120px);
+            }
+            
+            .dollar-right, .dollar-left {
+                transform: rotateY(90deg) translateZ(120px);
+                width: 240px;
+            }
+            
+            .dollar-top, .dollar-bottom {
+                transform: rotateX(90deg) translateZ(120px);
+                width: 240px;
+                height: 240px;
+            }
+            
+            .dollar-symbol {
+                font-size: 8rem;
+            }
+            
+            .hero-title {
+                font-size: 4.5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .dollar-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                margin: 80px auto 0;
+                width: 350px;
+                height: 350px;
+            }
+            
+            .dollar-face {
+                width: 210px;
+                height: 420px;
+            }
+            
+            .dollar-front, .dollar-back {
+                transform: translateZ(105px);
+            }
+            
+            .dollar-right, .dollar-left {
+                transform: rotateY(90deg) translateZ(105px);
+                width: 210px;
+            }
+            
+            .dollar-top, .dollar-bottom {
+                transform: rotateX(90deg) translateZ(105px);
+                width: 210px;
+                height: 210px;
+            }
+            
+            .dollar-symbol {
+                font-size: 7rem;
+            }
+            
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding-top: 120px;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .hero-content {
+                margin-bottom: 80px;
+            }
+            
+            .hero-cta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.98);
+                padding: 30px;
+                border-top: 1px solid rgba(0, 100, 65, 0.2);
+            }
+            
+            .nav-links.active li {
+                margin: 15px 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cities-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
+            header, .hero, .features, .stats, .membership, .application, .events, footer {
+                padding-left: 20px;
+                padding-right: 20px;
             }
             
-            .hero p {
-                font-size: 18px;
+            .hero-title {
+                font-size: 2.8rem;
             }
             
-            nav ul {
-                display: none;
+            .hero-subtitle {
+                font-size: 1.4rem;
             }
             
-            .mobile-menu {
-                display: block;
+            .section-title, .membership-title {
+                font-size: 2.5rem;
             }
             
-            .section {
-                padding: 70px 0;
+            .dollar-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .dollar-face {
+                width: 180px;
+                height: 360px;
+            }
+            
+            .dollar-front, .dollar-back {
+                transform: translateZ(90px);
+            }
+            
+            .dollar-right, .dollar-left {
+                transform: rotateY(90deg) translateZ(90px);
+                width: 180px;
+            }
+            
+            .dollar-top, .dollar-bottom {
+                transform: rotateX(90deg) translateZ(90px);
+                width: 180px;
+                height: 180px;
+            }
+            
+            .dollar-symbol {
+                font-size: 5rem;
+            }
+            
+            .price {
+                font-size: 3rem;
+            }
+            
+            .membership-card, .application-form {
+                padding: 40px 30px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+            
+            .cities-grid {
+                grid-template-columns: 1fr;
             }
         }
         
         @media (max-width: 576px) {
-            .hero {
-                padding: 150px 0 80px;
+            .hero-title {
+                font-size: 2.2rem;
             }
             
-            .hero h1 {
-                font-size: 32px;
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .section-title h2 {
-                font-size: 28px;
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dollar-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .dollar-face {
+                width: 150px;
+                height: 300px;
+            }
+            
+            .dollar-front, .dollar-back {
+                transform: translateZ(75px);
+            }
+            
+            .dollar-right, .dollar-left {
+                transform: rotateY(90deg) translateZ(75px);
+                width: 150px;
+            }
+            
+            .dollar-top, .dollar-bottom {
+                transform: rotateX(90deg) translateZ(75px);
+                width: 150px;
+                height: 150px;
+            }
+            
+            .dollar-symbol {
+                font-size: 4rem;
+            }
+            
+            .dollar-text {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title, .membership-title {
+                font-size: 2rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Watermarks -->
-    <div class="watermark watermark-1">МОСКОВСКИЙ ЗДОРОВЬЕ</div>
-    <div class="watermark watermark-2">ЭЛИТНАЯ КЛИНИКА</div>
+    <!-- Сетка-фон с параллаксом -->
+    <div class="grid-bg" id="gridBg"></div>
+    
+    <!-- Плавающие элементы -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <!-- Парящие частицы -->
+    <div class="particles" id="particles"></div>
     
     <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-heartbeat logo-icon"></i>
-                <div class="logo-text">Московский <span>Здоровье</span></div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#about">О клинике</a></li>
-                    <li><a href="#doctors">Врачи</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
+    <header id="header">
+        <div class="logo">
+            <span class="logo-main">VISION</span>
+            <span class="logo-elite">ELITE</span>
         </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Привилегии</a></li>
+            <li><a href="#stats">Цифры</a></li>
+            <li><a href="#membership">Членство</a></li>
+            <li><a href="#events">События</a></li>
+            <li><a href="#application">Заявка</a></li>
+        </ul>
+        
+        <a href="#application" class="cta-header">Вступить</a>
     </header>
     
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1>Элитная медицина в сердце Москвы</h1>
-            <p>Инновационные методы диагностики и лечения от ведущих специалистов с мировым именем. Персонализированный подход к каждому пациенту.</p>
-            <a href="#contact" class="btn">Записаться на прием</a>
-        </div>
-    </section>
-    
-    <!-- Services -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Наши услуги</h2>
-                <p>Мы предлагаем полный спектр медицинских услуг премиум-класса с применением передовых технологий</p>
+        <div class="hero-content">
+            <h1 class="hero-title">VISION ELITE</h1>
+            <h2 class="hero-subtitle">Сообщество 0,01%. Только по приглашению.</h2>
+            <p class="hero-description">Эксклюзивная сеть для самых влиятельных лидеров, инноваторов и создателей будущего. Доступ к закрытым возможностям, недоступным 99,99% мира.</p>
+            <div class="hero-cta">
+                <a href="#application" class="btn btn-primary">Подать заявку</a>
+                <a href="#features" class="btn btn-secondary">Изучить привилегии</a>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Генетический паспорт здоровья</h3>
-                        <p>Полный анализ ДНК для выявления предрасположенностей к заболеваниям и создания персонализированной программы профилактики.</p>
-                        <div class="service-price">от 85 000 ₽</div>
-                    </div>
+        </div>
+        
+        <!-- 3D Dollar -->
+        <div class="dollar-container">
+            <div class="dollar-3d">
+                <div class="dollar-face dollar-front">
+                    <div class="dollar-glow"></div>
+                    <div class="dollar-symbol">$</div>
+                    <div class="dollar-text">ELITE 0.01%</div>
                 </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Антиэйдж терапия премиум</h3>
-                        <p>Комплексное омоложение организма на клеточном уровне с применением стволовых клеток и пептидных технологий.</p>
-                        <div class="service-price">от 120 000 ₽</div>
-                    </div>
+                <div class="dollar-face dollar-back">
+                    <div class="dollar-glow"></div>
+                    <div class="dollar-symbol">€</div>
+                    <div class="dollar-text">EXCLUSIVE</div>
                 </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Экспресс-диагностика "Здоровье за 4 часа"</h3>
-                        <p>Полное обследование организма с выдачей заключения и рекомендаций от ведущих специалистов за 4 часа.</p>
-                        <div class="service-price">65 000 ₽</div>
-                    </div>
-                </div>
+                <div class="dollar-face dollar-right"></div>
+                <div class="dollar-face dollar-left"></div>
+                <div class="dollar-face dollar-top"></div>
+                <div class="dollar-face dollar-bottom"></div>
             </div>
         </div>
     </section>
     
-    <!-- About -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>О клинике</h2>
-                <p>Московский Здоровье — это синергия передовой медицины и безупречного сервиса</p>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Эксклюзивные привилегии</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3 class="feature-title">Закрытые резиденции</h3>
+                <p class="feature-description">Доступ к частным клубам и резиденциям в 25 мировых столицах с полным сервисом консьержа.</p>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Медицина будущего доступна сегодня</h3>
-                    <p>Наша клиника объединила лучших врачей России и Европы, чтобы предложить пациентам медицинские услуги высочайшего уровня. Мы используем оборудование, аналогов которому нет в России.</p>
-                    <p>Каждый пациент получает персонального врача-куратора, который сопровождает на всех этапах диагностики и лечения. Мы создали среду, где медицина становится искусством, а забота о здоровье — стилем жизни.</p>
-                    <p>Наш подход основан на принципах превентивной медицины — мы не просто лечим заболевания, а предотвращаем их развитие, продлевая активное долголетие наших пациентов.</p>
-                    <a href="#contact" class="btn">Узнать больше</a>
+            
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-user-secret"></i>
                 </div>
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1516549655669-df6654e35d31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Интерьер клиники">
-                </div>
+                <h3 class="feature-title">Абсолютная приватность</h3>
+                <p class="feature-description">Blockchain-идентификация, шифрование военного уровня. Никаких публичных списков членов.</p>
             </div>
-        </div>
-    </section>
-    
-    <!-- Doctors -->
-    <section class="section" id="doctors">
-        <div class="container">
-            <div class="section-title">
-                <h2>Наши врачи</h2>
-                <p>Специалисты с мировым именем, которые ставят здоровье пациента на первое место</p>
+            
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="feature-title">Кураторские знакомства</h3>
+                <p class="feature-description">AI-подбор контактов с мировыми лидерами на основе ваших целей и интересов.</p>
             </div>
-            <div class="doctors-grid">
-                <div class="doctor-card">
-                    <div class="doctor-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="doctor-info">
-                        <h3>Проф. Иванов А.Д.</h3>
-                        <p class="doctor-specialty">Кардиохирург</p>
-                        <p>20+ лет опыта, провел более 5000 успешных операций</p>
-                    </div>
+            
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-crown"></i>
                 </div>
-                <div class="doctor-card">
-                    <div class="doctor-img" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="doctor-info">
-                        <h3>Др. Петрова Е.В.</h3>
-                        <p class="doctor-specialty">Невролог</p>
-                        <p>Специалист по заболеваниям нервной системы, автор 50+ научных работ</p>
-                    </div>
+                <h3 class="feature-title">Белый перчаточный сервис</h3>
+                <p class="feature-description">Ваш персональный ассистент 24/7 решает любые задачи - от бронирования острова до организации частного полета.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="doctor-card">
-                    <div class="doctor-img" style="background-image: url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="doctor-info">
-                        <h3>Проф. Сидоров М.К.</h3>
-                        <p class="doctor-specialty">Онколог</p>
-                        <p>Разработчик инновационных методов лечения рака, член Европейского онкологического общества</p>
-                    </div>
+                <h3 class="feature-title">Pre-IPO инвестиции</h3>
+                <p class="feature-description">Доступ к закрытым раундам финансирования, венчурным сделкам и альтернативным активам.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-glow"></div>
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
                 </div>
-                <div class="doctor-card">
-                    <div class="doctor-img" style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="doctor-info">
-                        <h3>Др. Козлова О.Н.</h3>
-                        <p class="doctor-specialty">Эндокринолог</p>
-                        <p>Специалист по гормональному здоровью и anti-age медицине</p>
-                    </div>
-                </div>
+                <h3 class="feature-title">Глобальная сеть</h3>
+                <p class="feature-description">Члены в 68 странах, 40+ отраслях. Ежегодный саммит на частном острове.</p>
             </div>
         </div>
     </section>
     
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <h2>Готовы изменить свое здоровье?</h2>
-            <p>Запишитесь на первичную консультацию и получите персонализированный план оздоровления от наших специалистов</p>
-            <a href="#contact" class="btn">Записаться на прием</a>
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <h2 class="section-title">В цифрах</h2>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="memberCount">0</div>
+                <div class="stat-label">Избранных членов</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number" id="countryCount">0</div>
+                <div class="stat-label">Стран присутствия</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number" id="eventCount">0</div>
+                <div class="stat-label">Событий ежегодно</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number" id="investmentCount">0</div>
+                <div class="stat-label">Млрд $ под управлением</div>
+            </div>
         </div>
     </section>
     
-    <!-- Contact -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Свяжитесь с нами</h2>
-                <p>Наш менеджер свяжется с вами в течение 15 минут для уточнения деталей</p>
+    <!-- Membership Section -->
+    <section class="membership" id="membership">
+        <div class="membership-content">
+            <h2 class="membership-title">Членство Vision Elite</h2>
+            <p class="membership-description">Процесс отбора включает 5 этапов проверки. Только 1,2% заявок получают приглашение.</p>
+            
+            <div class="membership-card">
+                <div class="price">€500,000</div>
+                <div class="price-period">годовой членский взнос • Вступительный взнос €1,000,000</div>
+                
+                <ul class="benefits-list" id="benefitsList">
+                    <li><i class="fas fa-check"></i> Полный доступ ко всем закрытым мероприятиям</li>
+                    <li><i class="fas fa-check"></i> Персональный консьерж уровня "Платиновый ключ"</li>
+                    <li><i class="fas fa-check"></i> Приоритет на pre-IPO и венчурных раундах</li>
+                    <li><i class="fas fa-check"></i> Участие в Annual Summit на частном острове</li>
+                    <li><i class="fas fa-check"></i> Криптографически защищенная платформа</li>
+                    <li><i class="fas fa-check"></i> Ежемесячные брифинги от ведущих аналитиков</li>
+                    <li><i class="fas fa-check"></i> Личное представление 15+ новым контактам ежемесячно</li>
+                    <li><i class="fas fa-check"></i> Пожизненное членство после 7 лет участия</li>
+                </ul>
+                
+                <a href="#application" class="btn btn-primary" id="applyButton">Начать отбор</a>
             </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Контакты</h3>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div>Москва, ул. Тверская, д. 15 (вход с Вознесенского переулка)</div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone contact-icon"></i>
-                            <div>+7 (495) 123-45-67</div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div>info@moszdorovie.ru</div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock contact-icon"></i>
-                            <div>Пн-Пт: 8:00-21:00, Сб-Вс: 9:00-18:00</div>
-                        </div>
+        </div>
+    </section>
+    
+    <!-- Events Section - Кнопочная карта -->
+    <section class="events" id="events">
+        <h2 class="section-title">Глобальные события</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 60px; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Закрытые мероприятия в мировых столицах. Доступ только для членов Vision Elite.
+        </p>
+        
+        <div class="cities-grid">
+            <div class="city-card" data-city="ny">
+                <div class="city-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="city-name">Нью-Йорк</h3>
+                <p class="city-event">Финансовый саммит на Парк-Авеню</p>
+                <p class="city-date">Июнь 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="london">
+                <div class="city-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3 class="city-name">Лондон</h3>
+                <p class="city-event">Королевский прием в Букингемском дворце</p>
+                <p class="city-date">Сентябрь 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="dubai">
+                <div class="city-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <h3 class="city-name">Дубай</h3>
+                <p class="city-event">Инвестиционный форум на The Palm</p>
+                <p class="city-date">Ноябрь 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="tokyo">
+                <div class="city-icon">
+                    <i class="fas fa-torii-gate"></i>
+                </div>
+                <h3 class="city-name">Токио</h3>
+                <p class="city-event">Технологический саммит в Гиндзе</p>
+                <p class="city-date">Март 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="singapore">
+                <div class="city-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="city-name">Сингапур</h3>
+                <p class="city-event">Саммит по устойчивым инвестициям</p>
+                <p class="city-date">Август 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="zurich">
+                <div class="city-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3 class="city-name">Цюрих</h3>
+                <p class="city-event">Зимний саммит по сохранению капитала</p>
+                <p class="city-date">Январь 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="monaco">
+                <div class="city-icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <h3 class="city-name">Монако</h3>
+                <p class="city-event">Ежегодная яхтенная регата членов</p>
+                <p class="city-date">Май 2024</p>
+            </div>
+            
+            <div class="city-card" data-city="paris">
+                <div class="city-icon">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <h3 class="city-name">Париж</h3>
+                <p class="city-event">Закрытый аукцион вин и искусства</p>
+                <p class="city-date">Октябрь 2024</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Application Form Section -->
+    <section class="application" id="application">
+        <h2 class="section-title">Заявка на членство</h2>
+        
+        <div class="application-form">
+            <h3 class="form-title">Начните процесс отбора</h3>
+            
+            <form id="membershipForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Имя *</label>
+                        <input type="text" class="form-input" placeholder="Ваше полное имя" required>
                     </div>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Фамилия *</label>
+                        <input type="text" class="form-input" placeholder="Ваша фамилия" required>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="appointmentForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Ваше имя" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" placeholder="Телефон" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" required>
-                                <option value="" disabled selected>Выберите услугу</option>
-                                <option value="genetic">Генетический паспорт здоровья</option>
-                                <option value="antiage">Антиэйдж терапия премиум</option>
-                                <option value="diagnostic">Экспресс-диагностика</option>
-                                <option value="consultation">Первичная консультация</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Дополнительная информация"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Отправить заявку</button>
-                    </form>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" placeholder="Ваш приватный email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Телефон</label>
+                        <input type="tel" class="form-input" placeholder="+7 (XXX) XXX-XX-XX">
+                    </div>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Страна резидентства *</label>
+                    <select class="form-select" required>
+                        <option value="">Выберите страну</option>
+                        <option value="ru">Россия</option>
+                        <option value="us">США</option>
+                        <option value="uk">Великобритания</option>
+                        <option value="ch">Швейцария</option>
+                        <option value="ae">ОАЭ</option>
+                        <option value="sg">Сингапур</option>
+                        <option value="other">Другая</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Основная сфера деятельности *</label>
+                    <select class="form-select" required>
+                        <option value="">Выберите сферу</option>
+                        <option value="finance">Финансы / Инвестиции</option>
+                        <option value="tech">Технологии</option>
+                        <option value="realestate">Недвижимость</option>
+                        <option value="industry">Промышленность</option>
+                        <option value="energy">Энергетика</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Как вы узнали о Vision Elite? *</label>
+                    <select class="form-select" required>
+                        <option value="">Выберите вариант</option>
+                        <option value="recommendation">Рекомендация члена сообщества</option>
+                        <option value="event">Участие в закрытом событии</option>
+                        <option value="partner">Через партнерскую организацию</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Дополнительная информация</label>
+                    <textarea class="form-textarea" placeholder="Расскажите о ваших интересах, целях, ожиданиях от членства..."></textarea>
+                </div>
+                
+                <div class="form-group" style="text-align: center; margin-top: 40px;">
+                    <button type="submit" class="btn btn-primary" style="padding: 18px 50px; font-size: 18px;">Отправить заявку на рассмотрение</button>
+                </div>
+                
+                <p style="text-align: center; color: var(--text-secondary); margin-top: 30px; font-size: 0.9rem;">
+                    * Все данные защищены криптографией военного уровня. Вы получите ответ в течение 14 дней.
+                </p>
+            </form>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h4>Клиника</h4>
-                    <ul>
-                        <li><a href="#about">О нас</a></li>
-                        <li><a href="#services">Услуги</a></li>
-                        <li><a href="#doctors">Врачи</a></li>
-                        <li><a href="#contact">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Услуги</h4>
-                    <ul>
-                        <li><a href="#">Диагностика</a></li>
-                        <li><a href="#">Терапия</a></li>
-                        <li><a href="#">Хирургия</a></li>
-                        <li><a href="#">Реабилитация</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Контакты</h4>
-                    <ul>
-                        <li>Москва, ул. Тверская, 15</li>
-                        <li>+7 (495) 123-45-67</li>
-                        <li>info@moszdorovie.ru</li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Подписка</h4>
-                    <p>Подпишитесь на нашу рассылку для получения актуальной информации</p>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Ваш email">
-                    </div>
-                    <button class="btn">Подписаться</button>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">VISION ELITE</div>
+                <p style="max-width: 300px;">Эксклюзивное сообщество для 0,01% мировых лидеров. Объединяем влияние, создаем будущее.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 Элитная клиника "Московский Здоровье". Все права защищены.</p>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Сообщество</h4>
+                    <ul>
+                        <li><a href="#">О Vision Elite</a></li>
+                        <li><a href="#">Совет основателей</a></li>
+                        <li><a href="#">Кодекс сообщества</a></li>
+                        <li><a href="#">Благотворительность</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ресурсы</h4>
+                    <ul>
+                        <li><a href="#">Процесс отбора</a></li>
+                        <li><a href="#">Конфиденциальность</a></li>
+                        <li><a href="#">Условия членства</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Резиденции</h4>
+                    <ul>
+                        <li><a href="#">Нью-Йорк</a></li>
+                        <li><a href="#">Лондон</a></li>
+                        <li><a href="#">Дубай</a></li>
+                        <li><a href="#">Сингапур</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 VISION ELITE. Все права защищены. Информация строго конфиденциальна.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">Доступ только по персональному приглашению. Членство не продается, а заслуживается.</p>
+        </div>
     </footer>
-    
+
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').style.display = 
-                document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Form submission
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Спасибо за вашу заявку! Наш менеджер свяжется с вами в течение 15 минут.');
-            this.reset();
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        // Создание плавающих частиц
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
                 
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
+                // Случайные параметры
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 15;
                 
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if(window.innerWidth <= 768) {
-                        document.querySelector('nav ul').style.display = 'none';
-                    }
+                // Цвета в темно-зеленой палитре
+                const colors = ['#004225', '#006241', '#00a862', '#00c97c'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.backgroundColor = color;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Параллакс для сетки-фона
+        function parallaxGrid() {
+            const gridBg = document.getElementById('gridBg');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.5;
+                gridBg.style.transform = `translateY(${rate}px)`;
+            });
+        }
+        
+        // Анимация появления элементов при скролле
+        function animateOnScroll() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            const benefitsItems = document.querySelectorAll('.benefits-list li');
+            const cityCards = document.querySelectorAll('.city-card');
+            const windowHeight = window.innerHeight;
+            
+            featureCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                
+                if (cardPosition < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
                 }
             });
+            
+            benefitsItems.forEach((item, index) => {
+                const itemPosition = item.getBoundingClientRect().top;
+                
+                if (itemPosition < windowHeight - 100) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                    item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                }
+            });
+            
+            cityCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                
+                if (cardPosition < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
+                }
+            });
+        }
+        
+        // Анимация счетчиков
+        function animateCounters() {
+            const memberCount = document.getElementById('memberCount');
+            const countryCount = document.getElementById('countryCount');
+            const eventCount = document.getElementById('eventCount');
+            const investmentCount = document.getElementById('investmentCount');
+            
+            const statsSection = document.querySelector('.stats');
+            const statsPosition = statsSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (statsPosition < windowHeight - 100 && !memberCount.classList.contains('animated')) {
+                memberCount.classList.add('animated');
+                countryCount.classList.add('animated');
+                eventCount.classList.add('animated');
+                investmentCount.classList.add('animated');
+                
+                animateValue(memberCount, 0, 312, 2000);
+                animateValue(countryCount, 0, 68, 2000);
+                animateValue(eventCount, 0, 187, 2000);
+                animateValue(investmentCount, 0, 24.7, 2000);
+            }
+        }
+        
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = progress * (end - start) + start;
+                
+                if (element === investmentCount) {
+                    element.textContent = value.toFixed(1);
+                } else {
+                    element.textContent = Math.floor(value);
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Параллакс эффект для 3D доллара
+        function dollarParallax() {
+            const dollar = document.querySelector('.dollar-3d');
+            const scrollPosition = window.pageYOffset;
+            const rotation = scrollPosition * 0.02;
+            
+            dollar.style.transform = `perspective(1200px) rotateY(${rotation}deg) rotateX(10deg)`;
+            
+            // Эффект при наведении
+            dollar.addEventListener('mousemove', (e) => {
+                const rect = dollar.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 50;
+                const rotateX = (centerY - y) / 50;
+                
+                dollar.style.transform = `perspective(1200px) rotateY(${rotation + rotateY}deg) rotateX(${10 + rotateX}deg)`;
+            });
+            
+            dollar.addEventListener('mouseleave', () => {
+                dollar.style.transform = `perspective(1200px) rotateY(${rotation}deg) rotateX(10deg)`;
+            });
+        }
+        
+        // Mobile menu
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+        
+        // Header scroll effect
+        function headerScrollEffect() {
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+        
+        // Карточки городов
+        function initCityCards() {
+            const cityCards = document.querySelectorAll('.city-card');
+            
+            cityCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const cityName = card.querySelector('.city-name').textContent;
+                    const cityEvent = card.querySelector('.city-event').textContent;
+                    const cityDate = card.querySelector('.city-date').textContent;
+                    
+                    // Создаем модальное окно с информацией о событии
+                    const modal = document.createElement('div');
+                    modal.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.95);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 2000;
+                        backdrop-filter: blur(10px);
+                    `;
+                    
+                    modal.innerHTML = `
+                        <div style="background: rgba(20, 30, 25, 0.95); padding: 50px; border-radius: 20px; max-width: 500px; width: 90%; border: 1px solid rgba(0, 162, 98, 0.3); position: relative;">
+                            <button style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--light-green); font-size: 24px; cursor: pointer;">×</button>
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <div style="width: 60px; height: 60px; background: rgba(0, 162, 98, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    ${card.querySelector('.city-icon').outerHTML}
+                                </div>
+                                <h3 style="font-size: 2rem; margin-bottom: 10px; color: var(--light-green);">${cityName}</h3>
+                                <p style="color: var(--light-green); font-weight: 600; margin-bottom: 20px;">${cityDate}</p>
+                            </div>
+                            <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 20px;">${cityEvent}</p>
+                            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 30px;">Детальная информация о событии, спикерах и программе будет доступна после подтверждения членства в Vision Elite.</p>
+                            <div style="text-align: center;">
+                                <a href="#application" class="btn btn-primary" style="display: inline-block; padding: 15px 40px;">Подать заявку на членство</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                    
+                    // Закрытие модального окна
+                    modal.querySelector('button').addEventListener('click', () => {
+                        document.body.removeChild(modal);
+                    });
+                    
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            document.body.removeChild(modal);
+                        }
+                    });
+                    
+                    // Плавная прокрутка к форме при нажатии на кнопку
+                    setTimeout(() => {
+                        const applyBtn = modal.querySelector('.btn-primary');
+                        if (applyBtn) {
+                            applyBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                document.body.removeChild(modal);
+                                
+                                const applicationSection = document.querySelector('#application');
+                                if (applicationSection) {
+                                    window.scrollTo({
+                                        top: applicationSection.offsetTop - 80,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            });
+                        }
+                    }, 100);
+                });
+            });
+        }
+        
+        // Форма заявки
+        function initApplicationForm() {
+            const form = document.getElementById('membershipForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Создаем модальное окно успешной отправки
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.95);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 2000;
+                    backdrop-filter: blur(10px);
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: rgba(20, 30, 25, 0.95); padding: 50px; border-radius: 20px; max-width: 500px; width: 90%; border: 1px solid rgba(0, 162, 98, 0.3); position: relative; text-align: center;">
+                        <div style="width: 80px; height: 80px; background: rgba(0, 162, 98, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
+                            <i class="fas fa-check" style="color: var(--light-green); font-size: 36px;"></i>
+                        </div>
+                        <h3 style="font-size: 2rem; margin-bottom: 20px; color: var(--light-green);">Заявка принята</h3>
+                        <p style="margin-bottom: 30px; color: var(--text); font-size: 1.1rem;">Ваша заявка на членство в Vision Elite отправлена на рассмотрение.</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Наш комитет по отбору рассмотрит вашу кандидатуру в течение 14 рабочих дней. Вы получите ответ на указанный email.</p>
+                        <button id="closeModal" style="background: var(--gradient-green-light); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">Понятно</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Сбрасываем форму
+                form.reset();
+                
+                // Закрытие модального окна
+                document.getElementById('closeModal').addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        document.body.removeChild(modal);
+                    }
+                });
+            });
+        }
+        
+        // Плавная навигация
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Интерактивность для карточек
+        function initCardInteractivity() {
+            document.querySelectorAll('.feature-card, .city-card').forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создаем частицы
+            createParticles();
+            
+            // Инициализация параллакса
+            parallaxGrid();
+            
+            // Инициализация мобильного меню
+            initMobileMenu();
+            
+            // Инициализация эффектов скролла
+            headerScrollEffect();
+            
+            // Инициализация плавной прокрутки
+            initSmoothScroll();
+            
+            // Инициализация карточек городов
+            initCityCards();
+            
+            // Инициализация формы
+            initApplicationForm();
+            
+            // Инициализация интерактивности карточек
+            initCardInteractivity();
+            
+            // Запускаем анимации при скролле
+            window.addEventListener('scroll', () => {
+                animateOnScroll();
+                dollarParallax();
+                animateCounters();
+            });
+            
+            // Запускаем начальную анимацию
+            setTimeout(animateOnScroll, 500);
+            setTimeout(animateCounters, 1000);
+            
+            // Анимация для кнопок
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function(e) {
+                    const x = e.pageX - this.offsetLeft;
+                    const y = e.pageY - this.offsetTop;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+            
+            // Добавляем эффект печатающего текста для заголовка
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            
+            // Запускаем эффект печати с задержкой
+            setTimeout(typeWriter, 1000);
         });
     </script>
 </body>
